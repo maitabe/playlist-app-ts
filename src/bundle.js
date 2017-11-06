@@ -60,82 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(1), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, artist_model_1, list_controller_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    // console.log(title);
-    // () => {
-    //     /* code here */
-    // }
-    // console.log(testObj);
-    // let STORAGE_ID = 'artist-playlist';
-    // get data from local storage
-    // let getFromLocalStorage = () => {
-    // 	return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
-    // };
-    // let artists = getFromLocalStorage();
-    var listCtrl = new list_controller_1.default();
-    listCtrl.updateList();
-    // click to add an artist
-    document.querySelector("#addArtist").addEventListener("click", (event) => {
-        let artistName = document.getElementById('artistName').value;
-        let image = document.getElementById('imageUrl').value;
-        let videoUrl = document.getElementById('youTubeUrl').value;
-        let newArtist = new artist_model_1.default(artistName, image, videoUrl);
-        console.log(newArtist);
-        // let newArtist = {
-        //     artistName: (<HTMLInputElement>document.getElementById('artistName')).value,
-        //     image: (<HTMLInputElement>document.getElementById('imageUrl')).value,
-        //     videoUrl:(<HTMLInputElement>document.getElementById('youTubeUrl')).value
-        // }
-        if (artists.length === 0) {
-            newArtist.id = 0;
-        }
-        else {
-            newArtist.id = artists[artists.length - 1].id + 1;
-        }
-        artists.push(newArtist);
-        saveToLocalStorage();
-        document.querySelector("span").innerHTML = "new artist had been added!";
-        updateList();
-        // clear input fields
-        document.getElementById('artistName').value = " ",
-            document.getElementById('imageUrl').value = "",
-            document.getElementById('youTubeUrl').value = "";
-    }, false);
-}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//ARTIST MODEL
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    class ArtistModel {
-        constructor(name, image, youtubeUrl) {
-            this.name = name;
-            this.image = image;
-            this.youtubeUrl = youtubeUrl;
-        }
-    }
-    exports.default = ArtistModel;
-}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports) {
@@ -172,6 +101,85 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     }
     exports.ListController = ListController;
     exports.default = ListController;
+}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(0), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, list_controller_1, form_controller_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    // console.log(title);
+    // () => {
+    //     /* code here */
+    // }
+    var listCtrl = new list_controller_1.default();
+    listCtrl.updateList();
+    var formCtrl = new form_controller_1.FormController(listCtrl);
+}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(3), __webpack_require__(0)], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, artist_model_1, list_controller_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class FormController {
+        constructor(listController) {
+            this.list = listController;
+            var that = this;
+        }
+    }
+    exports.FormController = FormController;
+    // click to add an artist
+    document.querySelector("#addArtist").addEventListener("click", (event) => {
+        let artistName = document.getElementById('artistName').value;
+        let image = document.getElementById('imageUrl').value;
+        let videoUrl = document.getElementById('youTubeUrl').value;
+        let newArtist = new artist_model_1.default(artistName, image, videoUrl);
+        console.log(newArtist);
+        if (this.list.artists.length === 0) {
+            newArtist.id = 0;
+        }
+        else {
+            newArtist.id = this.list.artists[this.list.artists.length - 1].id + 1;
+        }
+        this.list.artists.push(newArtist);
+        this.saveToLocalStorage();
+        document.querySelector("span").innerHTML = "new artist had been added!";
+        this.list.updateList();
+        // clear input fields
+        document.getElementById('artistName').value = " ",
+            document.getElementById('imageUrl').value = "",
+            document.getElementById('youTubeUrl').value = "";
+    }, false);
+    exports.default = list_controller_1.ListController;
+}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//ARTIST MODEL
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class ArtistModel {
+        constructor(name, image, youtubeUrl) {
+            this.name = name;
+            this.image = image;
+            this.youtubeUrl = youtubeUrl;
+        }
+    }
+    exports.default = ArtistModel;
 }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
