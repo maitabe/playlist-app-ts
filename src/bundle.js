@@ -67,7 +67,7 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(1)], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, artist_model_1) {
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports, __webpack_require__(1), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, artist_model_1, list_controller_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     // console.log(title);
@@ -75,32 +75,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
     //     /* code here */
     // }
     // console.log(testObj);
-    let STORAGE_ID = 'artist-playlist';
+    // let STORAGE_ID = 'artist-playlist';
     // get data from local storage
-    let getFromLocalStorage = () => {
-        return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
-    };
-    let artists = getFromLocalStorage();
-    // update list of artist
-    let updateList = () => {
-        var ar = getFromLocalStorage();
-        document.getElementById('list').innerHTML = '';
-        console.log(artists);
-        if (ar.length !== 0) {
-            for (var i = 0; i < ar.length; i++) {
-                let name = ar[i].artistName;
-                let image = ar[i].image;
-                let video = ar[i].videoUrl;
-                document.getElementById('list').innerHTML += '<div class="card-columns"> <div class="card"> <img class="card-img-top img-fluid" src=" ' + image + ' " alt="  "> \
-                <div class="card-block"> <h4 class="card-title">' + name + '</h4> <p class="card-text">' + video + '</p></div></div></div>';
-            }
-        }
-    };
-    updateList();
-    // save data to local storage
-    let saveToLocalStorage = () => {
-        localStorage.setItem(STORAGE_ID, JSON.stringify(artists));
-    };
+    // let getFromLocalStorage = () => {
+    // 	return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+    // };
+    // let artists = getFromLocalStorage();
+    var listCtrl = new list_controller_1.default();
+    listCtrl.updateList();
     // click to add an artist
     document.querySelector("#addArtist").addEventListener("click", (event) => {
         let artistName = document.getElementById('artistName').value;
@@ -148,6 +130,48 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//ARTIST MODEL
         }
     }
     exports.default = ArtistModel;
+}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__, exports], __WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    class ListController {
+        constructor() {
+            this.STORAGE_ID = 'artist-playlist';
+            // get data from local storage
+            this.getFromLocalStorage = () => {
+                return JSON.parse(localStorage.getItem(this.STORAGE_ID) || '[]');
+            };
+            // save data to local storage
+            this.saveToLocalStorage = () => {
+                localStorage.setItem(this.STORAGE_ID, JSON.stringify(this.artists));
+            };
+            // update list of artist
+            this.updateList = () => {
+                var ar = this.getFromLocalStorage();
+                document.getElementById('list').innerHTML = '';
+                console.log(this.artists);
+                if (ar.length !== 0) {
+                    for (var i = 0; i < ar.length; i++) {
+                        let name = ar[i].artistName;
+                        let image = ar[i].image;
+                        let video = ar[i].videoUrl;
+                        document.getElementById('list').innerHTML += '<div class="card-columns"> <div class="card"> <img class="card-img-top img-fluid" src=" ' + image + ' " alt="  "> \
+                    <div class="card-block"> <h4 class="card-title">' + name + '</h4> <p class="card-text">' + video + '</p></div></div></div>';
+                    }
+                }
+            };
+            this.artists = this.getFromLocalStorage();
+        }
+    }
+    exports.ListController = ListController;
+    exports.default = ListController;
 }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 

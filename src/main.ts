@@ -11,46 +11,24 @@ import ListController from  "./list.controller";
 
 
 // console.log(testObj);
-let STORAGE_ID = 'artist-playlist';
+// let STORAGE_ID = 'artist-playlist';
 
 // get data from local storage
-let getFromLocalStorage = () => {
-	return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
-};
+// let getFromLocalStorage = () => {
+// 	return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+// };
 
-let artists = getFromLocalStorage();
+// let artists = getFromLocalStorage();
 
 
+var listCtrl = new ListController();
 
-// update list of artist
-let updateList = () => {
-    var ar = getFromLocalStorage();
-        document.getElementById('list').innerHTML = '';
-    
-        console.log(artists);
-        if(ar.length !== 0) {
-            for(var i = 0; i < ar.length; i++){
-                let name = ar[i].artistName;
-                let image = ar[i].image;
-                let video = ar[i].videoUrl;
-        
-                
-                document.getElementById('list').innerHTML += '<div class="card-columns"> <div class="card"> <img class="card-img-top img-fluid" src=" ' + image + ' " alt="  "> \
-                <div class="card-block"> <h4 class="card-title">' + name + '</h4> <p class="card-text">' + video + '</p></div></div></div>'
-               
-            }
-        }
-        
-    }
-
-updateList();
+listCtrl.updateList();
 
 
 
-// save data to local storage
-let saveToLocalStorage = () => {
-    localStorage.setItem(STORAGE_ID, JSON.stringify(artists));
-}
+
+
 
 
 
