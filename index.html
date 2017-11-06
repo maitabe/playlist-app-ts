@@ -1,14 +1,50 @@
 <!doctype html>
 <html>
-    <head>
-        <title>Angular-Playlist-App</title>
-    </head>
-    <body>
-        <h1>Music Playlist</h1>
+  <head>
+    <title>PlayList App</title>
 
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Music Playlist</h1>
+
+      <!-- <form > -->
+
+        <div class="form-group">
+          <input type="text" id="artistName" class="form-control" placeholder="Name"></input>
+        </div>
+
+        <div class="form-group">
+          <input type="text" id="imageUrl" class="form-control" placeholder="Image URL"></input>
+        </div>
+
+        <div class="form-group">
+          <input type="text" id="youTubeUrl" class="form-control" placeholder="YouTube URL" ></input>
+        </div>
+
+        <button class="btn btn-primary" id="addArtist">Add</button>
+      <!-- </form> -->
+        
         <span></span>
-        <!-- <button id="action">CLICK ME</button> -->
 
-        <script type="text/javascript" src="src/bundle.js"></script>
-    </body>
+      
+       <div id="list">
+        
+       </div>
+
+      
+        
+       
+      <!-- <button id="action">CLICK ME</button> -->
+    </div>
+
+    <!-- <script> var exports = {}; </script> -->
+   
+      <!-- <script type="text/javascript" src="src/main.js"></script> -->
+      <script type="text/javascript" src="src/bundle.js"></script>
+      
+
+  </body>
 </html>
